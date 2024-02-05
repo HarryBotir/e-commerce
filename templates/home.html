@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %} Bosh sahifa{% endblock title %}
+{% block content %} 
+    {% if user.is_authenticated %}
+        {{user.username}}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Chiqib ketish</button>
+        </form>
+    {% else %}
+        <p> Saytga kirmagansiz</p>
+        <form method="post" action="{% url 'login'%}"> {% csrf_token %}
+            <button type="submit">Kirish</button>
+        </form>
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <button type="submit">Ro'yxatdan o'tish</button>
+        </form>
+    {% endif %}
+{% endblock content %}
